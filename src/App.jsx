@@ -12,6 +12,8 @@ function App() {
         duration: 10,
     });
 
+    const inputIsValid = Object.values(userInput).every((value) => value >= 0) && userInput.duration > 0;
+
     function handleChange(inputIdentifier, newValue) {
         setUserInput((prevUserInput) => {
             return {
@@ -21,11 +23,14 @@ function App() {
         });
     }
 
+    
+
     return (
         <>
             <Header />
             <UserInput userInput={userInput} onChange={handleChange}/>
-            <Results input={userInput} />
+            {!inputIsValid && <p className="center">Please enter valid input data</p>}
+            {inputIsValid && <Results input={userInput} />}
         </>
     );
 }
